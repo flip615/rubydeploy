@@ -1,0 +1,71 @@
+<%= link_to 'Logout', sessions_destroy_path %>
+<br><br>
+<h4>Hi, <%= current_user.name.titleize %>!</h4>
+<br>
+<div class="row">
+<div class="col-1"></div>
+	<div class="col-10">
+		<% if flash[:errors] %>
+			<% flash[:errors].each do |message| %>
+			<p style="color:red"><%= message %></p>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-1"></div>
+	<!-- Register Form -->
+	<div class="col-6">
+		<form action="/bright_ideas" method="post">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+
+			<div class="form-group">
+				
+				<input style="display:inline-block" type="content" name="content" id="content" class="form-control" placeholder="Post something witty here...">
+
+				<button style="display:inline-block" type="submit" class="btn btn-primary">Idea!</button>
+			</div>
+			
+		</form>
+	</div>
+	
+	<div class="col-1"></div>
+</div>
+<!-- Start of all idea post -->
+
+<div class="row">
+	<div class="col-1"></div>
+	<!-- Register Form -->
+	<div class="col-6">
+		
+			<% @ideas.each do |count|%>
+			<% @all_ideas.each do |idea|%>
+			<% if count.id == idea.id %>
+			<p>
+			<a href="/users/<%= idea.user_id %>"><%= idea.user.name.titleize %></a>
+			says: <%= idea.content %>
+			 
+
+			<% if idea.user_id == current_user.id %>
+				<a href="/delete/<%= idea.id %>">Delete</a>
+			<% end %>
+			<br>
+			&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			<% unless current_user.ideas_liked.include? idea %>
+				<a href="/like/<%= idea.id %>">Like</a>
+			<% else %>
+				<a href="/unlike/<%= idea.id %>">Unlike</a>
+			<% end %>|
+			<a href="/bright_ideas/<%= idea.id %>"><%= idea.likes.count %> people</a> like this.
+			
+			</p>
+			<br>
+			<% end %>
+			<% end %>
+			<% end %>
+	</div>
+	
+	<div class="col-1"></div>
+</div>

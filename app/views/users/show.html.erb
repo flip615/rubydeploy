@@ -1,0 +1,28 @@
+
+
+
+<div class="row">
+
+
+<div class="col-6"></div>
+	<div class="col-13">
+		<a href="/bright_ideas">Bright Ideas</a>
+		<%= link_to 'Logout', sessions_destroy_path %>
+
+	</div>
+</div>
+<div class="row">
+<div class="col-1"></div>
+
+	<div class="col-5">
+	<hr style="border-width: 5px;">
+		<p>Name: <%= @view_user.name %></p>
+		<p>Alias: <%= @view_user.alias %></p>
+		<p>Alias: <%= @view_user.email %></p>
+		<hr style="border-width: 5px;">
+		<p>Total number of post: <%= @view_user.bright_ideas.count %></p>
+		<p>Total number of likes: <%= @view_user.likes.count %></p>
+	</div>
+		
+
+</div>

@@ -1,0 +1,43 @@
+<div class="row">
+
+
+<div class="col-6"></div>
+	<div class="col-13">
+		<a href="/bright_ideas">Bright Ideas</a>
+		<%= link_to 'Logout', sessions_destroy_path %>
+
+	</div>
+
+</div>
+
+<div class="row">
+<div class="col-1"></div>
+
+	<div class="col-5">
+	<p>
+	<a href="/users/<%= @idea.user_id %>"><%= @idea.user.name.titleize %></a>
+	says: <%= @idea.content %>
+	</p>
+</div>	
+</div>
+
+
+<div class="row">
+<div class="col-1"></div>
+
+	<div class="col-5">
+	<h4>People who liked this post:</h4>
+	<table>
+		<tr>
+			<th>Alias</th>
+			<th>Name</th>
+		</tr>
+		<% @idea.likes.each do |users_liked|  %>
+		<tr>
+			<td><a href="/users/<%= users_liked.user.id %>"><%= users_liked.user.alias.titleize %></a></td>
+			<td><%= users_liked.user.name.titleize %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>	
+</div>
